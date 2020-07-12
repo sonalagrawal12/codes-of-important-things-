@@ -1,0 +1,13 @@
+int Solution::maxProfit(const vector<int> &A) {
+    if(A.empty())
+    return 0;
+    int n = A.size();
+    int dp[n] = {0};
+    int temp = dp[n-1]+A[n-1];
+    for(int i = n-2; i>=0; i--)
+    {
+        dp[i] = max(dp[i+1], -A[i]+temp);
+        temp = max(temp, dp[i]+A[i]);
+    }
+    return dp[0];
+}
