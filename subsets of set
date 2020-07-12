@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        
+        unsigned int pow_set_size = pow(2, nums.size()); 
+        int counter, j; 
+        vector<vector<int> >v1;
+        /*Run from counter 000..0 to 111..1*/
+        for(counter = 0; counter < pow_set_size; counter++) 
+        { 
+            vector<int>v;
+        for(j = 0; j < nums.size(); j++) 
+        { 
+            /* Check if jth bit in the counter is set 
+                If set then print jth element from set */
+            if(counter & (1 << j)) 
+               v.push_back(nums[j]); 
+        } 
+        v1.push_back(v);
+        }
+        return v1;
+    }
+        
+};
