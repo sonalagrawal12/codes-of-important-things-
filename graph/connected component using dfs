@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+void dfs(int s,bool visited[],vector<int> adj[]){
+	visited[s]=true;
+	for(auto i:adj[s]){
+		if(!visited[i]){
+			dfs(i,visited,adj);
+		}
+	}
+}
+int main() {
+
+        int nodes, edges, x, y, connectedComponents = 0;
+        cin >> nodes;                      
+        cin >> edges;
+		int k;
+		cin>>k;                      
+        bool visited[nodes];
+		memset(visited,0,nodes);
+		vector<int>adj[nodes];
+	    for(int i = 0;i < edges;++i) {
+         cin >> x >> y;     
+         adj[x-1].push_back(y-1);                   
+         adj[y-1].push_back(x-1);                  
+        }
+		int c=0;
+		for(int i=0;i<nodes;i++){
+    //every time if any vertex is unvisited then it is a connected component 
+			if(visited[i]==false){
+				c++;
+				dfs(i,visited,adj);
+			}
+		}
+		if(c>k)
+			cout<<-1<<endl;
+		else
+			cout<<edges-(nodes-k)<<endl;
+		
+}
