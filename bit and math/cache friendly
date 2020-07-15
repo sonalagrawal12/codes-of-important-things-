@@ -1,0 +1,5 @@
+This happens because as you know the array's occupy continues memory locations and there for say you're computer searches for array [10]…. Then what happens is a huge chunk of memory maybe from array [10]—array [20]…or some possible upper bound like that is brought into the memory…so the next time if you search for an element if that particular element is in the cashe then it's a cashe hit and if you're checking a near by number then it's most probably a cashe hit since that would be stored in contigues memory locations.
+
+Now when coming to the case of linked lists it's not nessesary that the nodes created are in continues memory location so that possibility of cashe miss is higher because say if we bring in a huge chunk of memory similarly as what we did for the array….what happens here is that we have no guarantee that in that particular memory brought to the cashe there is even one node of the list. This happens because of my later point that linked list do not compulsorily occupy continues memory..
+
+So the probability of cashe miss is higher.
