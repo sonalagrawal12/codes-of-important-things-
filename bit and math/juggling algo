@@ -1,0 +1,19 @@
+Juggling Algorithm: This is an extension of the above method. Instead of moving one by one, divide the array in different sets, where number of sets is equal to GCD of N and K and move the elements within sets.
+
+If GCD is 1 as is for the above example array (N = 7 and K = 2), then elements will be moved within one set only, we just start with temp = arr[0] and keep moving arr[I+d] to arr[I] and finally store temp at the right place.
+
+Here is an example for N = 12 and K = 3. GCD of N and K is 3:
+Let arr[] be {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+
+a) Elements are first moved in first set – (See below 
+   diagram for this movement)
+
+ArrayRotation
+
+       arr[] after this step --> {4 2 3 7 5 6 10 8 9 1 11 12}
+
+b) Then in second set.
+       arr[] after this step --> {4 5 3 7 8 6 10 11 9 1 2 12}
+
+c) Finally in third set.
+       arr[] after this step --> {4 5 6 7 8 9 10 11 12 1 2 3}
