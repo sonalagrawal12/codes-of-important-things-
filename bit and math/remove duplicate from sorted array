@@ -1,0 +1,14 @@
+int remove_duplicate(int a[],int N)
+{
+//Your code here
+    int cmp=a[0];
+    int k=1;
+    for(int i=1;i<N;i++){
+        if(a[i]!=cmp){
+            a[k]=a[i];
+            cmp=a[i];
+            k++;
+        }
+    }
+    return k;
+}
