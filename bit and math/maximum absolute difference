@@ -1,0 +1,18 @@
+int Solution::maxArr(vector<int> &A) {
+    int max =0;
+    int n=A.size();
+    int a[n];
+    int b[n];
+    for(int i=0;i<n;i++){
+        a[i]=A[i]+i;
+    }
+    for(int i=0;i<n;i++){
+        b[i]=A[i]-i;
+    }
+    sort(a,a+n);
+    sort(b,b+n);
+    int a1=a[n-1]-a[0];
+    int b1=b[n-1]-b[0];
+    max=(a1<b1)?b1:a1;
+    return max;
+}
