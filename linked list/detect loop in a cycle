@@ -1,0 +1,16 @@
+Floyd’s Cycle-Finding Algorithm: This is the fastest method. Traverse linked list using two pointers. Move one pointer by one step and another pointer by two-step. If these pointers meet at the same node then there is a loop. If pointers do not meet then linked list doesn’t have a loop.
+You may visualize the solution as two runners are running on a circular track, If they are having different speeds they will definitely meet up on circular track itself.
+Pseudo Code
+bool detectloop(Node* head) 
+{
+    Node *slow_p = head, *fast_p = head
+  
+    while (slow_p && fast_p && fast_p->next) 
+    {
+        slow_p = slow_p->next
+        fast_p = fast_p->next->next
+        if (slow_p == fast_p) 
+            return true 
+    }
+    return false  
+}  
