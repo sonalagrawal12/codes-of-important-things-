@@ -1,0 +1,27 @@
+Node *temp,*temp1,*temp3;
+    temp = head;
+    temp1 = head;
+    temp3 = head;
+    int c = 0;
+    int c1=0;
+    while(temp3!=NULL){
+        temp3 = temp3->next;
+        c1++;
+    }
+    if(k>=c1){
+        return head;
+    }
+    while(c<k-1 && temp!=NULL){
+        temp = temp->next;
+        c++;
+    }
+        Node *t= temp->next;
+        temp->next =NULL;
+        Node *t1 =head;
+        head = t;
+        Node *t2 = head;
+        while(t2->next !=NULL){
+            t2 = t2->next;
+        }
+        t2->next = t1;
+        return head;
