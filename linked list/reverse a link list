@@ -1,0 +1,38 @@
+void reverse(Node* head) 
+{
+    // Initialize current, previous and 
+    // next pointers 
+    Node *current = head; 
+    Node *prev = NULL, *next = NULL
+    while (current != NULL) 
+    {
+        // Store next 
+        next = current->next
+
+        // Reverse current node's pointer 
+        current->next = prev
+
+        // Move pointers one position ahead. 
+        prev = current
+        current = next
+    }
+    head = prev 
+}
+
+
+Recursive Solution : In this approach of reversing a linked list by passing a single pointer what we are trying to do is that we are making the previous node of the current node as his next node to reverse the linked list.
+We return the pointer of next node to his previous(current) node and then make the previous node as the next node of returned node and then returning the current node.
+We first traverse till the last node and making the last node as the head node of reversed linked list and then applying the above procedure in the recursive manner.
+Pseudo Code
+Node* reverse(Node* node) 
+{
+    if (node == NULL) :
+        return NULL
+    if (node->next == NULL) :
+        head = node
+        return node
+    Node* temp = reverse(node->next)
+    temp->next = node 
+    node->next = NULL 
+    return node
+}
