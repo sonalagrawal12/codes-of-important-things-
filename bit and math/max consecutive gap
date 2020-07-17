@@ -1,0 +1,18 @@
+///Given an unsorted array, find the maximum difference between the successive elements in its sorted form.
+
+///Try to solve it in linear time/space
+
+
+int Solution::maximumGap(const vector &A) {
+priority_queue pq;
+for(int x : A) pq.push(x);
+int max_diff = INT_MIN;
+if(A.size()<2) return 0;
+while(pq.size()>1)
+{
+int top = pq.top();
+pq.pop();
+max_diff = max(max_diff,top-pq.top());
+}
+return max_diff;
+}
