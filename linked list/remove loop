@@ -1,0 +1,25 @@
+ Node *slow,*fast;
+     slow = head;
+     fast = head;
+     int f=0;
+     while(fast && fast->next){
+         slow = slow->next;
+         fast = fast->next->next;
+         if(fast == slow ){
+             f=1;
+             break;
+         }
+     }
+     if(f!=0){
+         slow = head;
+         while(fast!=slow){
+             slow = slow->next;
+             fast = fast->next;
+         }
+    
+     Node *temp = slow->next;
+     while(temp->next!=slow){
+         temp = temp->next;
+     }
+     temp->next = NULL;
+     }
