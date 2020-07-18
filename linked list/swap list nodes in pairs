@@ -1,0 +1,26 @@
+ListNode* reverse(ListNode* A,int k){
+    ListNode* current = A;
+    ListNode* next = NULL;
+    ListNode* prev = NULL;
+    int count = 0;   
+     
+    /*reverse first k nodes of the linked list */
+    while (count < k && current!=NULL)
+    {
+        next  = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+        count++;
+    }
+    if(next!=NULL)
+    A->next=reverse(next,k);
+    return prev;
+}
+
+ListNode* Solution::swapPairs(ListNode* A) {
+    if((A==NULL)||(A->next == NULL)){
+        return A;
+    }
+    return reverse(A,2);
+}
