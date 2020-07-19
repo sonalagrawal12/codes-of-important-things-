@@ -1,0 +1,72 @@
+*************************using dfs********************************gfg ques link **https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1*************
+
+//every time we are passing an extra parameter which is parent of the node ,if the node is visited before and it is not equal to its parent then there must be cycle .
+bool  dfs(vector<int> g[],int v,bool visited[],int parent){
+    visited[v]=true;
+    for(auto i:g[v]){
+        if(!visited[i]){
+            if(dfs(g,i,visited,v))
+                return true;
+        }
+        else{
+            if(i!=parent){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+bool isCyclic(vector<int> g[], int V)
+{
+   // Your code here
+   bool visited[V];
+   memset(visited,0,V);
+   for(int i=0;i<V;i++){
+       if(!visited[i]){
+           int parent =-1;
+           int x = dfs(g,i,visited, parent);
+          if(x){
+            return true;
+          }
+       }
+   }
+   return false;
+}
+
+**************similar  approach using bfs*************************************
+bool isCyclicConntected(vector<int> adj[], int s, 
+                        int V, vector<bool>& visited) 
+{ 
+    // Set parent vertex for every vertex as -1. 
+    vector<int> parent(V, -1); 
+  
+    // Create a queue for BFS 
+    queue<int> q; 
+  
+    // Mark the current node as visited and enqueue it 
+    visited[s] = true; 
+    q.push(s); 
+  
+    while (!q.empty()) { 
+  
+        // Dequeue a vertex from queue and print it 
+        int u = q.front(); 
+        q.pop(); 
+  
+        // Get all adjacent vertices of the dequeued 
+        // vertex u. If a adjacent has not been visited, 
+        // then mark it visited and enqueue it. We also 
+        // mark parent so that parent is not considered 
+        // for cycle. 
+        for (auto v : adj[u]) { 
+            if (!visited[v]) { 
+                visited[v] = true; 
+                q.push(v); 
+                parent[v] = u; 
+            } 
+            else if (parent[u] != v) 
+                return true; 
+        } 
+    } 
+    return false; 
+} 
