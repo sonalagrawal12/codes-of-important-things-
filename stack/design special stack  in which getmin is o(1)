@@ -1,0 +1,44 @@
+*******video link ***********(https://www.youtube.com/watch?v=ufwPuyxkNVE&t=7s)***************
+****gfg ques link ********(https://practice.geeksforgeeks.org/problems/special-stack/1)************
+
+
+stack<int>s1;
+void push(int a) 
+{
+     //add code here
+     s.push(a);
+     if(s1.empty()){
+         s1.push(a);
+     }
+     else{
+         if( (!s.empty()) && s.top()<s1.top()){
+             s1.push(a);
+         }
+     }
+}
+
+int pop()
+{   
+    if(!s.empty()){
+        if(!s1.empty()){
+            if(s.top()==s1.top()){
+                int x = s.top();
+                s.pop();
+                s1.pop();
+                return x;
+            }
+        }
+            int x = s.top();
+            s.pop();
+            return x;
+        
+    }
+    //add code here.
+}
+
+int getMin()
+{
+   return s1.top();
+}
+
+*
