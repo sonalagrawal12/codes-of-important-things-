@@ -70,3 +70,38 @@ bool isCyclicConntected(vector<int> adj[], int s,
     } 
     return false; 
 } 
+
+***************using bfs ********************
+bool isCyclic(vector<int> g[], int V)
+{
+    
+     bool visited[V];
+    // Your code here
+    for(int i=0;i<V;i++){
+        visited[i]=false;
+    }
+    for(int i=0;i<V;i++){
+        if(!visited[i]){
+             queue<pair<int,int> >q;
+             q.push({i,-1});
+             visited[i]=true;
+       while(!q.empty()){
+        pair<int,int>p = q.front();
+        int x = p.first;
+        q.pop();
+        //v.push_back({p.first,p.second});
+        for(auto i:g[x]){
+            if(!visited[i]){
+                visited[i]=true;
+                q.push({i,x});
+            }
+            else{
+                if(i!=p.second)
+                    return 1;
+            }
+        }
+        }
+        }
+    }
+    return 0;
+}
