@@ -1,0 +1,49 @@
+
+*********************************************************************************************************************************************************************************
+https://practice.geeksforgeeks.org/problems/smallest-number-on-left/0
+*********************************************************************************************************************************************************************************
+
+********************************************************************************************************************************************************************************
+Let input sequence be 'arr[]' and size of array be 'n'
+
+1) Create a new empty stack S
+
+2) For every element 'arr[i]' in the input sequence 'arr[]',
+   where 'i' goes from 0 to n-1.
+    a) while S is nonempty and the top element of 
+       S is greater than or equal to 'arr[i]':
+           pop S
+    
+    b) if S is empty:
+           'arr[i]' has no preceding smaller value
+    c) else:
+           the nearest smaller value to 'arr[i]' is 
+           the top element of S
+
+    d) push 'arr[i]' onto S
+    
+*********************************************************************************************************************************************************************************
+
+void printPrevSmaller(int arr[], int n) 
+{ 
+    // Create an empty stack 
+    stack<int> S; 
+  
+    // Traverse all array elements 
+    for (int i=0; i<n; i++) 
+    { 
+        // Keep removing top element from S while the top 
+        // element is greater than or equal to arr[i] 
+        while (!S.empty() && S.top() >= arr[i]) 
+            S.pop(); 
+  
+        // If all elements in S were greater than arr[i] 
+        if (S.empty()) 
+            cout << "_, "; 
+        else  //Else print the nearest smaller element 
+            cout << S.top() << ", "; 
+  
+        // Push this element 
+        S.push(arr[i]); 
+    } 
+} 
