@@ -1,0 +1,58 @@
+*********************************************************************************************************************************************************************************
+https://practice.geeksforgeeks.org/problems/evaluation-of-postfix-expression/0
+*********************************************************************************************************************************************************************************
+1) Create a stack to store operands (or values).
+2) Scan the given expression and do following for every scanned element.
+…..a) If the element is a number, push it into the stack
+…..b) If the element is a operator, pop operands for the operator from stack. Evaluate the operator and push the result back to the stack
+3) When the expression is ended, the number in the stack is the final answer
+
+*********************************************************************************************************************************************************************************
+
+#include<iostream>
+#include<stack>
+using namespace std;
+int performTheOperation(char c,int op1,int op2){
+    switch(c){
+        case '+':
+            return op1+op2;
+        case '-':
+            return op1-op2;
+        case '*':
+            return op1*op2;
+        case '/':
+            return op1/op2;
+    }
+}
+int main(){
+    int t;
+    cin>>t;
+    cin.get();
+    while(t--){
+        //enter the expression
+        string s;
+        getline(cin,s);
+        stack<int> s1;
+        int n=s.length();
+        for(int i=0;i<n;i++){
+            //pahle check kar lo if it is an operator
+            if(s[i]=='+'|| s[i]=='-' || s[i]=='*' || s[i]=='/'){
+                //pop the 2 operand from the stack
+                int op2=(s1.top());
+                s1.pop();
+                int op1=(s1.top());
+                s1.pop();
+                int res=performTheOperation(s[i],op1,op2);
+                s1.push(res);
+            }
+            else{
+                s1.push((s[i]-'0'));
+            }
+        }
+        cout<<(s1.top())<<endl;
+
+    }
+
+    return 0;
+}
+
