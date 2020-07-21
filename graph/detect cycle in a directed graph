@@ -1,0 +1,42 @@
+*********************************************************************************************************************************************************************************
+https://practice.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1
+*********************************************************************************************************************************************************************************
+To detect a back edge, keep track of vertices currently in the recursion stack of function for DFS traversal. If a vertex is reached that is already in the recursion stack, then there is a cycle in the tree. The edge that connects the current vertex to the vertex in the recursion stack is a back edge. Use recStack[] array to keep track of vertices in the recursion stack.
+*********************************************************************************************************************************************************************************
+Create the graph using the given number of edges and vertices.
+Create a recursive function that initializes the current index or vertex, visited, and recursion stack.
+Mark the current node as visited and also mark the index in recursion stack.
+Find all the vertices which are not visited and are adjacent to the current node. Recursively call the function for those vertices, If the recursive function returns true, return true.
+If the adjacent vertices are already marked in the recursion stack then return true.
+Create a wrapper class, that calls the recursive function for all the vertices and if any function returns true return true. Else if for all vertices the function returns false return false.
+*********************************************************************************************************************************************************************************
+bool dfs(bool visited[],int x,vector<int> adj[],bool rec[]){
+    visited[x]=true;
+    rec[x]=true;
+    for(auto i:adj[x]){
+        if(!visited[i] && dfs(visited,i,adj,rec)){
+            return true;
+        }
+        else if(rec[i]){
+            return true;
+        }
+    }
+    rec[x]=false;
+    return false;
+}
+bool isCyclic(int V, vector<int> adj[])
+{
+    // Your code here
+    bool visited[V];
+    bool rec[V];
+    memset(visited,0,V);
+    memset(rec,0,V);
+    for(int i=0;i<V;i++){
+        if(!visited[i]){
+            if(dfs(visited,i,adj,rec))
+                return true;
+        }
+    }
+    return false;
+}
+*********************************************************************************************************************************************************************************
