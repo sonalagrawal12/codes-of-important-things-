@@ -1,0 +1,54 @@
+class Solution
+{
+    public:
+        int height(TreeNode *root)
+{
+    if(root==NULL)
+        return 0;
+    return (1+max(height(root->left),height(root->right)));
+}
+        vector<vector<int>> zigzagLevelOrder(TreeNode* root)
+        {
+            deque<TreeNode*>dq;
+            int h=height(root);
+            vector<vector<int>>v(h);
+            if(root ==NULL)
+                return v;
+            if(h==1)
+            {
+                v[0].push_back(root->val);
+                return v;
+            }
+            int z=0;
+            dq.push_back(root);
+            while(!dq.empty())
+            {
+                int sz=dq.size();
+                while(sz--)
+                {
+                    if(!(z&1))
+                    {
+                        TreeNode* x=dq.front();
+                        if(x->left)
+                            dq.push_back(x->left);
+                        if(x->right)
+                            dq.push_back(x->right);
+                        v[z].push_back(x->val);
+                        dq.pop_front();
+                    }
+                    else
+                    {
+                        TreeNode* x=dq.back();
+                        if(x->right)
+                            dq.push_front(x->right);
+                        if(x->left)
+                            dq.push_front(x->left);
+                        v[z].push_back(x->val);
+                        dq.pop_back();
+                    }
+                }
+                z++;
+            }
+            return v;
+        }
+};
