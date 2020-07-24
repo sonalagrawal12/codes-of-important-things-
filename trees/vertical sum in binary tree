@@ -1,0 +1,48 @@
+*********************************************************************************************************************************************************************************
+https://www.geeksforgeeks.org/vertical-sum-in-binary-tree-set-space-optimized/
+*********************************************************************************************************************************************************************************
+
+vector <int> verticalSum(Node *root) {
+    // add code here.
+    vector<int>v;
+    if(root == NULL)
+        return v;
+    if(root->left == NULL && root->right==NULL){
+        v.push_back(root->data);
+        return v;
+    }
+    //this will be like level order traversal of a node but we will push node-1 to left and node+1 to right 
+   // and we will make map of all levels 
+    
+    
+    
+    queue<Node *>q;
+    queue<int>q1;
+    q.push(root);
+    q1.push(0);
+    map<int,vector<int> >m;
+    while(!q.empty()){
+        Node *x=q.front();
+        q.pop();
+        int a =q1.front();
+        q1.pop();
+        m[a].push_back(x->data);
+        if(x->left){
+            q.push(x->left);
+            q1.push(a-1);
+        }
+        if(x->right){
+            q.push(x->right);
+            q1.push(a+1);
+        }
+    }
+    for(auto i:m){
+        vector<int>v1=i.second;
+        int s=0;
+        for(auto j:v1){
+            s+=j;
+        }
+        v.push_back(s);
+    }
+    return v;
+}
