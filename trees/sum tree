@@ -1,0 +1,22 @@
+***********************************************************************************************************************************************************************************
+https://practice.geeksforgeeks.org/problems/sum-tree/1/?track=ppc-trees&batchId=221
+***********************************************************************************************************************************************************************************
+Write a function that returns true if the given Binary Tree of size N is SumTree else return false. A SumTree is a Binary Tree in which value of each node x is equal to sum of nodes present in its left subtree and right subtree . An empty tree is SumTree and sum of an empty tree can be considered as 0. A leaf node is also considered as SumTree.
+***********************************************************************************************************************************************************************************
+//this will calculate sum of node's left and right 
+int sum(Node *root){
+    if(root == NULL)
+        return 0;
+     if(root->left ==NULL && root->right ==NULL)
+        return root->data;
+    return sum(root->left) + sum(root->right)+root->data;
+}
+bool isSumTree(Node* root)
+{
+    if ( root == NULL)
+        return true;
+    if ( root-> left == NULL && root -> right == NULL)
+        return true;
+    return (root-> data == sum(root-> left) + sum(root-> right)) && isSumTree(root->left) && isSumTree(root->right);
+}
+***********************************************************************************************************************************************************************************
