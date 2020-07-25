@@ -1,0 +1,52 @@
+*********************************************************************************************************************************************************************************
+https://practice.geeksforgeeks.org/problems/min-distance-between-two-given-nodes-of-a-binary-tree/1/?track=ppc-trees&batchId=221
+*********************************************************************************************************************************************************************************
+Node* lca(Node *root, int p, int q)
+{
+   //Your code here
+   if(root == NULL)
+    return NULL;
+   // here we will search for node which matches with p or q and return that node 
+   if(root->data == p || root->data ==q){
+       return root;
+   }
+   // this is like inorder traversal for searching the nodes
+   Node * left = lca(root->left,p,q);
+   Node *right = lca(root->right,p,q);
+   // if a node has both left and right as not null that means it is an ancestor so we return it
+   //else we will return whatever we get from left or right 
+   if(left && right){
+       return root;
+   }
+   
+   else{
+       return left?left:right ;
+   }
+}
+int dis(Node *root,int a, int value){
+    if(root == NULL)
+        return -1;
+    if(root->data == a){
+        return value;
+    }
+    int d = dis(root->left,a,value+1);
+    if(d!=-1){
+        return d;
+    }
+    d=dis(root->right,a,value+1);
+    return d;
+    
+}
+int findDist(Node* root, int a, int b) {
+    // Your code here
+    if(root ==NULL)
+        return -1;
+    // just find the lca and then find out distance of both nodes from lca and add them 
+    Node * lc = lca(root,a,b);
+    if(lc == NULL)
+        return -1;
+        
+    int a1=dis(lc,a,0);
+    int b1 = dis(lc,b,0);
+    return a1+b1;
+}
