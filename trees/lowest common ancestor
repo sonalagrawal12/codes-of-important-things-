@@ -1,0 +1,26 @@
+***********************************************************************************************************************************************************************************
+https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-binary-tree/1/?track=ppc-trees&batchId=221
+***********************************************************************************************************************************************************************************
+Node* lca(Node *root, int p, int q)
+{
+   //Your code here
+   if(root == NULL)
+    return NULL;
+   // here we will search for node which matches with p or q and return that node 
+   if(root->data == p || root->data ==q){
+       return root;
+   }
+   // this is like inorder traversal for searching the nodes
+   Node * left = lca(root->left,p,q);
+   Node *right = lca(root->right,p,q);
+   // if a node has both left and right as not null that means it is an ancestor so we return it
+   //else we will return whatever we get from left or right 
+   if(left && right){
+       return root;
+   }
+   
+   else{
+       return left?left:right ;
+   }
+}
+***********************************************************************************************************************************************************************************
