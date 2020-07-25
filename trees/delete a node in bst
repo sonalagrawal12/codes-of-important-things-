@@ -1,0 +1,54 @@
+Node* FindMin(Node* root)
+{
+	while(root->left != NULL) root = root->left;
+	return root;
+}
+// you are required to complete this function
+struct Node *del(struct Node * root ,int key){
+    if(root == NULL)
+        return root;
+   // if key is less than we traverse to left side 
+    if(key < root->data){
+        root->left = del(root->left,key);
+    }
+    // if key is greater than we traverse to right side 
+    else if(key>root->data){
+        root->right = del(root->right,key);
+    }
+    // if root data is equal to node which we want to  delete than we have three cases 
+    else{
+        // case 1 ,if(root is a leaf node ),then we simply delete the leaf node
+        if(root->left == NULL && !root->right){
+            delete root;
+            root=NULL;
+        }
+        //case 2 if root has 1 child 
+        // if right child is null we will replace root by its left part
+        else if( !root->right){
+            struct Node *temp = root;
+            root = root->left;
+            delete temp;
+        }
+        // if left child is null we will replace root by its right part 
+        else if(! root->left){
+            struct Node *temp = root;
+            root = root->right;
+            delete temp;
+        }
+        // case 3 if root has both child 
+        else{
+            // this will find min in right subtree which is inorder successor of given root as inorder successor will be the next greater element of this root 
+            struct Node *temp = FindMin(root->right);
+            root->data = temp->data;
+            // now root right will be changed to new deleted 
+            root->right = del(root->right,temp->data);
+        }
+    }
+    return root;
+}
+void deletionBT(struct Node* root, int key)
+{
+    // code here
+    root = del(root,key);
+    
+}
