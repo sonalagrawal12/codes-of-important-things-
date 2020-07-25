@@ -1,0 +1,51 @@
+*********************************************************************************************************************************************************************************
+https://www.geeksforgeeks.org/construct-tree-from-given-inorder-and-preorder-traversal/
+*********************************************************************************************************************************************************************************
+1) Pick an element from Preorder. Increment a Preorder Index Variable (preIndex in below code) to pick next element in next recursive call.
+2) Create a new tree node tNode with the data as picked element.
+3) Find the picked element’s index in Inorder. Let the index be inIndex.
+4) Call buildTree for elements before inIndex and make the built tree as left subtree of tNode.
+5) Call buildTree for elements after inIndex and make the built tree as right subtree of tNode.
+6) return tNode.
+*********************************************************************************************************************************************************************************
+struct Node* buildTree(char in[], char pre[], int inStrt, 
+                       int inEnd, unordered_map<char, int>& mp) 
+{ 
+    static int preIndex = 0; 
+  
+    if (inStrt > inEnd) 
+        return NULL; 
+  
+    /* Pick current node from Preorder traversal using preIndex  
+    and increment preIndex */
+    char curr = pre[preIndex++]; 
+    struct Node* tNode = newNode(curr); 
+  
+    /* If this node has no children then return */
+    if (inStrt == inEnd) 
+        return tNode; 
+  
+    /* Else find the index of this node in Inorder traversal */
+    int inIndex = mp[curr]; 
+  
+    /* Using index in Inorder traversal, construct left and  
+    right subtress */
+    tNode->left = buildTree(in, pre, inStrt, inIndex - 1, mp); 
+    tNode->right = buildTree(in, pre, inIndex + 1, inEnd, mp); 
+  
+    return tNode; 
+} 
+  
+// This function mainly creates an unordered_map, then 
+// calls buildTree() 
+struct Node* buldTreeWrap(char in[], char pre[], int len) 
+{ 
+    // Store indexes of all items so that we 
+    // we can quickly find later 
+    unordered_map<char, int> mp; 
+    for (int i = 0; i < len; i++) 
+        mp[in[i]] = i; 
+  
+    return buildTree(in, pre, 0, len - 1, mp); 
+}
+*********************************************************************************************************************************************************************************
