@@ -1,0 +1,33 @@
+***********************************************************************************************************************************************************************************
+https://practice.geeksforgeeks.org/problems/kth-ancestor-in-a-tree/1/?track=ppc-trees&batchId=221
+***********************************************************************************************************************************************************************************
+// idea is first we will go to node of which we have to find kth ancestor and then we will return 1 from that point and we will go to upward direction from that to check for ancestors
+
+bool vec(Node *root,int k, int node,vector<int> &v){
+    if(root){
+        if(root->data == node){
+            return 1;
+        }
+        if(vec(root->left,k,node,v)||vec(root->right,k,node,v)){
+            v.push_back(root->data);
+            return 1;
+        }
+        
+    }
+    return 0;
+}
+
+// your task is to complete this function
+int kthAncestor(Node *root, int k, int node)
+{
+    // Code here
+    if(root ==NULL)
+        return -1;
+    vector<int>v;
+    int x = vec(root,k,node,v);
+    if(k>v.size())
+        return -1;
+    else
+      return v[k-1];
+}
+***********************************************************************************************************************************************************************************
