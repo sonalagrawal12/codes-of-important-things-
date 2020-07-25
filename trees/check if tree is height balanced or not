@@ -1,0 +1,21 @@
+***********************************************************************************************************************************************************************************
+https://practice.geeksforgeeks.org/problems/check-for-balanced-tree/1
+***********************************************************************************************************************************************************************************
+int height(Node *root){
+    if(root == NULL)
+        return 0;
+    return 1+max(height(root->left),height(root->right));
+}
+
+bool isBalanced(Node *root) {
+    if(root == NULL)
+        return 1;
+    int x = height(root->right);
+    int y = height(root->left);
+    // chk for heights and chk if both right and left are balanced or not 
+    if(abs(x-y)<=1 && (isBalanced(root->left)) && isBalanced(root->right)){
+        return 1;
+    }
+    return 0;
+}
+***********************************************************************************************************************************************************************************
