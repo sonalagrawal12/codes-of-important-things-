@@ -1,0 +1,40 @@
+*********************************************************************************************************************************************************************************
+https://practice.geeksforgeeks.org/problems/construct-bst-from-post-order/1/?track=ppc-bst&batchId=221
+*********************************************************************************************************************************************************************************
+Node *constructTree (int pos[], int size)
+{
+int i=size-1;
+stack<Node *> s1;
+// create root that is last value of postorder traversal 
+Node* root=new Node(pos[i--]);
+Node* ptr=root;
+while(i>=0)
+{
+// if curr ptr value is greater tahn previous than it will come at right of prev 
+//and we will push it on to stack 
+if(pos[i]>ptr->data)
+{
+Node* t= new Node(pos[i--]);
+ptr->right=t;
+s1.push(ptr);
+ptr=t;
+}
+// if curr ptr value is less tahn previous than we will search for a node just greater tahn this so we pop out from stack 
+else
+{
+if(s1.empty() || pos[i]>s1.top()->data)
+{
+Node* t=new Node(pos[i--]);
+ptr->left=t;
+ptr=t;
+}
+else
+{
+ptr=s1.top();
+s1.pop();
+}
+}
+}
+return root;
+}
+*********************************************************************************************************************************************************************************
