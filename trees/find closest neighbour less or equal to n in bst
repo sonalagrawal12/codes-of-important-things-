@@ -1,0 +1,28 @@
+***********************************************************************************************************************************************************************************
+https://www.geeksforgeeks.org/how-to-implement-decrease-key-or-change-key-in-binary-search-tree/
+***********************************************************************************************************************************************************************************
+int findMaxforN(Node* root, int N) 
+{ 
+    // Base cases 
+    if (root == NULL) 
+        return -1; 
+    if (root->key == N) 
+        return N; 
+  
+    // If root's value is smaller, try in rght 
+    // subtree 
+    else if (root->key < N) { 
+        int k = findMaxforN(root->right, N); 
+        // if k is -1 means there this is the value we want to find as there is no other value in right or left of this 
+        if (k == -1) 
+            return root->key; 
+        else
+            return k; 
+    } 
+  
+    // If root's key is greater, return value 
+    // from left subtree. 
+    else if (root->key > N)  
+        return findMaxforN(root->left, N);     
+} 
+ ***********************************************************************************************************************************************************************************
