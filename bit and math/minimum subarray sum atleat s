@@ -1,0 +1,67 @@
+*********************************************************************************************************************************************************************************
+https://leetcode.com/problems/minimum-size-subarray-sum/
+*********************************************************************************************************************************************************************************
+class Solution {
+public:
+    int minSubArrayLen(int s, vector<int>& nums) {
+        deque<int>q;
+        int sum =0;
+        int c=1;
+        int max1 =INT_MAX;
+        for(int i=0;i<nums.size();i++){
+            sum+=nums[i];
+            if(sum<s){
+              q.push_back(nums[i]);
+            }
+            else{
+                q.push_back(nums[i]);
+                while(sum>=s && !q.empty()){
+                    int x = q.front();
+                    if(sum-x>=s){
+                        sum-=x;
+                        q.pop_front();
+                    }
+                    else{
+                        break;
+                    }
+                }
+                int y =q.size();
+                max1 = min(y,max1);
+            }
+        }
+        if(max1 == INT_MAX)
+            return 0;
+        return max1;
+    }
+};
+*********************************************************************************************************************************************************************************
+Initialize \text{left}left pointer to 0 and \text{sum}sum to 0
+Iterate over the \text{nums}nums:
+Add \text{nums}[i]nums[i] to \text{sum}sum
+While \text{sum}sum is greater than or equal to ss:
+Update \text{ans}=\min(\text{ans},i+1-\text{left})ans=min(ans,i+1−left), where i+1-\text{left}i+1−left is the size of current subarray
+It means that the first index can safely be incremented, since, the minimum subarray starting with this index with \text{sum} \geq ssum≥s has been achieved
+Subtract \text{nums[left]}nums[left] from \text{sum}sum and increment \text{left}left
+int minSubArrayLen(int s, vector<int>& nums)
+{
+    int n = nums.size();
+    int ans = INT_MAX;
+    int left = 0;
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += nums[i];
+        while (sum >= s) {
+            ans = min(ans, i + 1 - left);
+            sum -= nums[left++];
+        }
+    }
+    return (ans != INT_MAX) ? ans : 0;
+}
+Time complexity: O(n)O(n). Single iteration of O(n)O(n).
+Each element can be visited atmost twice, once by the right pointer(ii) and (atmost)once by the \text{left}left pointer.
+Space complexity: O(1)O(1) extra space. Only constant space required for \text{left}left, \text{sum}sum, \text{ans}ans and ii.
+
+*********************************************************************************************************************************************************************************
+
+
+
