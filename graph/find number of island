@@ -1,0 +1,38 @@
+// the idea is simply using dfs , we count no of times our dfs function will be called in main function ,only when our number is when and is not visited
+
+bool check(vector<int> a[],int i,int j,int &n,int &m,vector<bool> v[]){
+    if((i>=0 && i<n && j>=0 && j<m) && (a[i][j]) && !v[i][j] ){
+        return 1;
+    }
+    return 0;
+}
+void dfs(vector<int> a[],int i,int j,int &n,int &m,vector<bool> v[]){
+        v[i][j]=1;
+        int rowNbr[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; 
+        int colNbr[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; 
+      for(int k=0;k<8;k++){
+          if(check(a,i+rowNbr[k],j+colNbr[k],n,m,v)){
+              dfs(a,i+rowNbr[k],j+colNbr[k],n,m,v);
+          }
+      }
+}
+int findIslands(vector<int> a[], int n, int m) {
+
+    // Your code here
+    vector<bool>v[n];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            v[i].push_back(0);
+        }
+    }
+    int c=0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(!v[i][j] && a[i][j]){
+                dfs(a,i,j,n,m,v);
+                c++;
+            }
+        }
+    }
+    return c;
+}
