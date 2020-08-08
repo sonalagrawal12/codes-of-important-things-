@@ -1,0 +1,12 @@
+smallestSumSubarr(arr, n)
+    Initialize min_ending_here = INT_MAX
+    Initialize min_so_far = INT_MAX
+    
+    for i = 0 to n-1
+        if min_ending_here > 0
+            min_ending_here = arr[i]        
+        else
+            min_ending_here += arr[i]
+        min_so_far = min(min_so_far, min_ending_here)
+
+    return min_so_far
