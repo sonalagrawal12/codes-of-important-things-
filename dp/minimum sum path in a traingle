@@ -1,0 +1,37 @@
+https://www.geeksforgeeks.org/minimum-sum-path-triangle/
+*********************************************************************************************************************************************************************************
+Bottom up – Start from the nodes on the bottom row; the min pathsum for these nodes are the values of the nodes themselves. And after that, minimum pathsum at the ith node of kth row would be the minimum of the pathsum of its two children + the node’s value, i.e.:
+
+memo[k][i] = min( memo[k+1][i], memo[k+1][i+1]) + A[k][i];
+OR
+Simply set memo as a 1D array, and update it
+this will be space efficient also :
+
+For the row k :
+
+memo[i] = min( memo[i], memo[i+1]) + A[k][i];
+
+*********************************************************************************************************************************************************************************
+
+int minSumPath(vector<vector<int> >& A) 
+{ 
+    // For storing the result in a 1-D array, 
+    // and simultaneously updating the result. 
+    int memo[A.size()]; 
+    int n = A.size() - 1; 
+  
+    // For the bottom row 
+    for (int i = 0; i < A[n].size(); i++)  
+        memo[i] = A[n][i];     
+  
+    // Calculation of the remaining rows, 
+    // in bottom up manner. 
+    for (int i = A.size() - 2; i >= 0; i--)  
+        for (int j = 0; j < A[i].size(); j++)  
+            memo[j] = A[i][j] + min(memo[j], 
+                                    memo[j + 1]); 
+  
+    // return the top element 
+    return memo[0]; 
+} 
+*********************************************************************************************************************************************************************************
