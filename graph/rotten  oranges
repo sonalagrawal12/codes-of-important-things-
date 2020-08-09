@@ -36,7 +36,7 @@ int main() {
 	            }
 	        }
 	    }
-	    q.push({-1,-1});
+	    
 	    int c=0;
 	    int f=0;
 	    while(!q.empty()){
@@ -44,13 +44,7 @@ int main() {
 	        q.pop();
 	        int a=  x.first;
 	        int b = x.second;
-	        if(a==-1){
-	            if(!q.empty()){
-	                 q.push({-1,-1});
-	            }
-	            continue;
-	           
-	        }
+	       
 	        if(a+1<n){
 	            if(!visited[a+1][b] && arr[a+1][b]==1){
 	                visited[a+1][b]=1;
