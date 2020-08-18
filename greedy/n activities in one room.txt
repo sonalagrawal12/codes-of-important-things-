@@ -1,3 +1,7 @@
+//  the idea is first sort using finfish time and before this strore the index of the activities and then find the non conflicting activities
+https://practice.geeksforgeeks.org/problems/n-meetings-in-one-room/0
+
+
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long int 
