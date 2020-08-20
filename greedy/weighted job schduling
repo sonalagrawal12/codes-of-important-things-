@@ -1,0 +1,36 @@
+https://www.youtube.com/watch?v=AxQjrWiOdkE&t=802s
+https://leetcode.com/problems/maximum-profit-in-job-scheduling/
+
+
+#define f first
+#define s second
+
+class Solution {
+public:
+    static bool comp(pair<pair<int,int>,int> p1, pair<pair<int,int>,int> p2){
+        return p1.f.s<p2.f.s;
+    }
+    int lastNOC(vector<pair<pair<int,int>,int>> &a, int k){
+        for(int i=k-1;i>=0;i--){
+            if(a[i].f.s<=a[k].f.f) return i;
+        }
+        return -1;
+    }
+    int jobScheduling(vector<int>& start,vector<int>& end,vector<int>& profit){
+        if(start.size()==0) return 0;
+        int n=start.size();
+        vector<pair<pair<int,int>,int>> a(n);
+        for(int i=0;i<n;i++) a[i]={{start[i],end[i]},profit[i]};
+        sort(a.begin(),a.end(),comp);
+        vector<int> dp(n,0);
+        dp[0]=a[0].s;
+        for(int i=1;i<n;i++){
+            int incP=a[i].s;
+            int j=lastNOC(a,i);
+            if(j!=-1) incP+=dp[j];
+            dp[i]=max(incP,dp[i-1]);
+        }
+        return dp[n-1];
+    }
+};
+
