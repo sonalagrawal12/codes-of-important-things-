@@ -1,0 +1,80 @@
+
+https://leetcode.com/problems/search-in-rotated-sorted-array/submissions/
+
+
+
+class Solution {
+public:
+    
+     int binary(vector<int> &arr,int l,int h,int target){
+        if(l<=h){
+            int mid = l+(h-l)/2;
+            if(arr[mid] == target){
+                return mid;
+            }
+            if(arr[mid]>=arr[l]){
+                if(arr[l]<=target && arr[mid]>=target)
+                     return binary(arr,l,mid-1,target);
+                return binary(arr,mid+1,h,target);
+            }
+            else{
+                if(arr[h]>=target && arr[mid]<=target)
+                     return binary(arr,mid+1,h,target);
+                return binary(arr,l,mid-1,target);
+            }
+        }
+        return -1;
+    }
+    int search(vector<int>& arr, int target) {
+        return binary(arr,0,arr.size()-1,target);
+    }
+};
+
+METHOD 2 USING PIVOT 
+
+class Solution {
+public:
+    int pivot(vector<int> &arr,int l,int h){
+        if(l<=h){
+            if(l==h){
+                return l;
+            }
+            int mid = l+(h-l)/2;
+            if(arr[mid]>arr[mid+1]){
+                return mid;
+            }
+            if(arr[mid]>=arr[l]){
+                return pivot(arr,mid+1,h);
+            }
+            else{
+                return pivot(arr,l,mid-1);
+            }
+        }
+        return -1;
+    }
+     int binary(vector<int> &arr,int l,int h,int target){
+        if(l<=h){
+            int mid = l+(h-l)/2;
+            if(arr[mid] == target){
+                return mid;
+            }
+            if(arr[mid]<target){
+                return binary(arr,mid+1,h,target);
+            }
+            else{
+                return binary(arr,l,mid-1,target);
+            }
+        }
+        return -1;
+    }
+    int search(vector<int>& arr, int target) {
+        int x = pivot(arr,0,arr.size()-1);
+        if(target == arr[x]){
+            return x;
+        }
+        if(target<arr[x] && target>=arr[0]){
+            return binary(arr,0,x,target);
+        }
+        return binary(arr,x+1,arr.size()-1,target);
+    }
+};
