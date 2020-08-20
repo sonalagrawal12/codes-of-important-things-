@@ -1,0 +1,38 @@
+https://leetcode.com/problems/single-element-in-a-sorted-array/
+
+class Solution {
+public:
+    void bs(vector<int> &arr,int l,int h,int &ans){
+        if(l>h){
+            return;
+        }
+        if(l==h){
+            ans = arr[l];
+            return;
+        }
+        int mid = l+(h-l)/2;
+        if(mid%2 ==0){
+            if(arr[mid]==arr[mid+1]){
+                 bs(arr,mid+2,h,ans);
+            }
+            else{
+                bs(arr,l,mid,ans);
+            }
+        }
+        else{
+            if(arr[mid]==arr[mid-1]){
+                 bs(arr,mid+1,h,ans);
+            }
+            else{
+                bs(arr,l,mid-1,ans);
+            }
+        }
+        
+    }
+    int singleNonDuplicate(vector<int>& arr) {
+        int n = arr.size();
+        int ans;
+        bs(arr,0,n-1,ans);
+        return ans;
+    }
+};
