@@ -1,0 +1,16 @@
+ We simply need to do the preorder traversal of the given Binary Tree. 
+ But, along with this, we need to make use of braces at appropriate positions. 
+ But, we also need to make sure that we omit the unnecessary braces. To do the preorder traversal, we make use of recursion.
+ -************************************************************************************************************------------------------
+
+public class Solution {
+    public String tree2str(TreeNode t) {
+        if(t==null)
+            return "";
+        if(t.left==null && t.right==null)
+            return t.val+"";
+        if(t.right==null)
+            return t.val+"("+tree2str(t.left)+")";
+        return t.val+"("+tree2str(t.left)+")("+tree2str(t.right)+")";   
+    }
+}
